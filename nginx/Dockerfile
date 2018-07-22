@@ -3,13 +3,17 @@ FROM debian:jessie
 MAINTAINER Maxence POUTORD <maxence.poutord@gmail.com>
 
 RUN apt-get update && apt-get install -y \
-    nginx
+    nginx curl
 
 ADD nginx.conf /etc/nginx/
 ADD symfony.conf /etc/nginx/sites-available/
 
 RUN ln -s /etc/nginx/sites-available/symfony.conf /etc/nginx/sites-enabled/symfony
 RUN rm /etc/nginx/sites-enabled/default
+
+
+# alias
+RUN echo 'alias ll="ls -la"' >> ~/.bashrc
 
 RUN echo "upstream php-upstream { server php:9000; }" > /etc/nginx/conf.d/upstream.conf
 
@@ -19,3 +23,4 @@ CMD ["nginx"]
 
 EXPOSE 80
 EXPOSE 443
+

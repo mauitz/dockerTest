@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# change to source directory
+cd /var/www/cms
+
+# install node-modules
+npm install
+npm rebuild node-sass
+
+# run angular-cli server
+# ./serve app
+# ./serve pos
+tail -f /dev/null
